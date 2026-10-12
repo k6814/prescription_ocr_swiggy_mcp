@@ -1,0 +1,17 @@
+{
+  "name": "instamart-agent-backend",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "add-user": "node scripts/add-user.js",
+    "discover-tools": "node scripts/discover-tools.js",
+    "inspect-shapes": "node scripts/inspect-shapes.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "groq-sdk": "^1.6.0"
+  }
+}

@@ -1,0 +1,21 @@
+# Keep secrets and local state out of the image. data/ in particular must come from the
+# mounted volume, never baked in -- an image layer containing other people's Swiggy tokens
+# would outlive any attempt to delete them.
+node_modules
+data
+.env
+.env.*
+!.env.example
+.user-token
+.address-id
+server.log
+shapes.json
+.bulk-raw
+*.sh
+*.txt
+catalog.json
+Dockerfile
+.dockerignore
+docker-compose.yml
+.git
+.gitignore

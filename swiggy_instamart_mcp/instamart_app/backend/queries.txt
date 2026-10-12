@@ -1,0 +1,37 @@
+# One search term per line. Blank lines and #comments are ignored.
+# Each term is paginated to exhaustion; results are merged and deduped
+# by spinId across every term.
+#
+# Search depth is capped per query (~40-50 results), so breadth comes from
+# having many terms, not from more pages. Add whatever you care about.
+
+paracetamol
+ibuprofen
+fever
+cough
+cold
+vomitting
+acidity
+antacid
+allergy
+pain relief
+headache
+antiseptic
+bandage
+ors
+vitamin
+calcium
+digestion
+diarrhea
+constipation
+throat
+drops
+syrup
+tablet
+ointment
+balm
+inhaler
+thermometer
+sanitizer
+mask
+first aid

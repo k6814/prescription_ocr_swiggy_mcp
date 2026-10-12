@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "rx-web",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "cd rx-ocr-expo/app && npx expo start --web --port 8081"
+      ],
+      "port": 8081
+    }
+  ]
+}

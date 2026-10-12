@@ -1,0 +1,38 @@
+# Dokploy: create a Compose application pointing at this file, or a plain Application using
+# the Dockerfile next to it. Either way the volume below is the part that must not be skipped.
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      # Dokploy injects these from the application's Environment settings. Nothing secret
+      # belongs in this file -- it is committed.
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL}
+      APP_RETURN_URL: ${APP_RETURN_URL:-rxocr://connected}
+      PORT: ${PORT:-3000}
+      # 1 = one proxy in front (Dokploy's Traefik). Without it every client shares one
+      # apparent IP and the /enroll rate limit locks everyone out together.
+      TRUST_PROXY: ${TRUST_PROXY:-1}
+      # Set to 1 once your users have enrolled, to stop new sign-ups.
+      ENROLL_DISABLED: ${ENROLL_DISABLED:-}
+      ENROLL_MAX_PER_HOUR: ${ENROLL_MAX_PER_HOUR:-10}
+      ENROLL_TTL_HOURS: ${ENROLL_TTL_HOURS:-24}
+    volumes:
+      # EVERY user's encrypted Swiggy tokens and the OAuth client registration live here.
+      # Lose this and everyone must sign in to Swiggy again.
+      - instamart-data:/app/data
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:3000/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  instamart-data:
